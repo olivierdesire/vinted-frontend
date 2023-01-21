@@ -5,7 +5,7 @@ import Offers from "../components/Offers";
 
 const Home = () => {
   const [data, setData] = useState(null);
-  const [isLooding, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -24,7 +24,7 @@ const Home = () => {
         <img src={Hero} alt="Hero" />
         <div className="hero-block"></div>
       </section>
-      {isLooding ? <p> Downloading ... </p> : <Offers data={data} />}
+      {isLoading ? <p> Downloading ... </p> : <Offers data={data} />}
     </div>
   );
 };
