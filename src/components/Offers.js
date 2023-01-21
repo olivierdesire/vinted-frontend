@@ -12,7 +12,7 @@ const Offers = ({ data }) => {
                   <img src={element.owner.account.avatar.url} alt="url-owner" />
                   <p>{element.owner.account.username}</p>
                 </div>
-                <Link to="/offer/:id" target="_blank">
+                <Link to={`/offer/${element._id}`} target="_blank">
                   <img
                     src={element.product_pictures[0].url}
                     alt="url-product"
