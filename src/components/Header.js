@@ -5,11 +5,11 @@ const Header = () => {
     <header className="container">
       <img src={Logo} alt="Vinted" />{" "}
       <input placeholder="Que recherches-tu"></input>
-      <div>
+      <div className="sign-up">
         <button>s'inscrire</button>
         <button>se connecter</button>
       </div>
-      <button>vends tes articles</button>
+      <button className="vint">vends tes articles</button>
     </header>
   );
 };

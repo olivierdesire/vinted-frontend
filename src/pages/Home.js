@@ -22,7 +22,10 @@ const Home = () => {
     <div>
       <section className="hero">
         <img src={Hero} alt="Hero" />
-        <div className="hero-block"></div>
+        <div className="hero-block">
+          <h1>Prêts à faire du tri dans vos placards ?</h1>
+          <button>Commencer à vendre</button>
+        </div>
       </section>
       {isLoading ? <p> Downloading ... </p> : <Offers data={data} />}
     </div>

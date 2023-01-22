@@ -19,47 +19,45 @@ const Offer = () => {
     fetchData();
   }, []);
 
+  // Récupération des objets products.
+  const tabKeys = [];
+  const tabValues = [];
+  if (!isLoading) {
+    for (let i = 0; i < data.product_details.length; i++) {
+      const keys = Object.keys(data.product_details[i]);
+      const values = Object.values(data.product_details[i]);
+      tabKeys.push(keys[0]);
+      tabValues.push(values[0]);
+    }
+    console.log(tabKeys);
+    console.log(tabValues);
+  }
+
   return isLoading ? (
     <p> Downloading ... </p>
   ) : (
-    <section>
+    <section className="product">
       <img src={data.product_pictures[0].url} alt="pic" />
-      <div>
-        <p>{data.product_price}</p>
-        {data.product_details[0].MARQUE && (
-          <div>
-            <p>MARQUE</p>
-            <p>{data.product_details[0].MARQUE}</p>
-          </div>
-        )}
-        {data.product_details[1].TAILLE && (
-          <div>
-            <p>TAILLE</p>
-            <p>{data.product_details[1].TAILLE}</p>
-          </div>
-        )}
-        {data.product_details[1].ÉTAT && (
-          <div>
-            <p>ETAT</p>
-            <p>{data.product_details[1].ÉTAT}</p>
-          </div>
-        )}
-        {data.product_details[0].COULEUR && (
-          <div>
-            <p>COULEUR</p>
-            <p>{data.product_details[0].COULEUR}</p>
-          </div>
-        )}
-        {data.product_details[0].EMPLACEMENT && (
-          <div>
-            <p>EMPLACEMENT</p>
-            <p>{data.product_details[0].EMPLACEMENT}</p>
-          </div>
-        )}
-        <p></p>
-        <div>
+      <div className="offer-description">
+        <p className="offer-price">{data.product_price} €</p>
+        {tabKeys.map((element, index) => {
+          // console.log(tabKeys[index]);
+          // console.log(tabKeys[index]);
+          return (
+            <div key={index} className="offer-detail">
+              <p className="key">{tabKeys[index]}</p>
+              <p className="value">{tabValues[index]}</p>
+            </div>
+          );
+        })}
+        <p className="trait"></p>
+        <div className="title">
           <p>{data.product_name}</p>
           <p>{data.product_description}</p>
+          <div className="avatar">
+            <img src={data.owner.account.avatar.url} alt="avatar" />
+            <p>{data.owner.account.username}</p>
+          </div>
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+/* GENERAL */
+
 .container {
   width: 1300px;
   margin: 0 auto;
@@ -13,6 +15,34 @@ header {
 header img {
   width: 110px;
 }
+
+header input {
+  height: 35px;
+  width: 500px;
+  border: none;
+  background-color: rgb(255, 249, 249);
+  padding-left: 10px;
+}
+
+.sign-up {
+  display: flex;
+  gap: 20px;
+}
+
+header button {
+  background-color: white;
+  border: 0.1px solid #1d696f;
+  color: #1d696f;
+  border-radius: 3px;
+  padding: 5px 20px;
+}
+
+.vint {
+  background-color: #1d696f;
+  color: white;
+}
+
+/* HOME */
 
 .hero {
   position: relative;
@@ -33,6 +63,21 @@ header img {
   left: 130px;
   top: 130px;
   border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+.hero-block button {
+  color: white;
+  background-color: #1d696f;
+  width: fit-content;
+  padding: 10px;
 }
 
 .list-offers {
@@ -69,4 +114,63 @@ header img {
 .avatar p,
 .offer p {
   color: rgb(169, 165, 165);
+}
+
+/* OFFER */
+
+.product {
+  background-color: #eaedee;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+  height: 100vh;
+}
+
+.product > img {
+  height: 600px;
+  width: 500px;
+  object-fit: cover;
+}
+
+.offer-description {
+  background-color: #ffffff;
+  height: 600px;
+  width: 500px;
+  padding: 30px;
+}
+
+.offer-price {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.offer-detail {
+  display: flex;
+}
+.key,
+.value {
+  flex: 1;
+}
+
+.key {
+  color: #a4a8a9;
+  margin-bottom: 10px;
+}
+
+.trait {
+  margin: 70px 0px;
+  border: 0.1px solid rgb(222, 216, 216);
+}
+
+.title > :nth-child(1) {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.title > :nth-child(2) {
+  color: rgb(176, 170, 170);
+}
+
+.title > p {
+  margin: 10px 0px;
 }
