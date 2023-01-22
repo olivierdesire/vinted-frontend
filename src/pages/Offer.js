@@ -17,7 +17,7 @@ const Offer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   // Récupération des objets products.
   const tabKeys = [];
