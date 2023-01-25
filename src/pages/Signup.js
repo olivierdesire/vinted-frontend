@@ -6,6 +6,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(true);
+  const [isValidUsername, setIsValidUsername] = useState(true);
 
   return (
     <form
@@ -21,7 +22,10 @@ const Signup = () => {
             newsletter: newsletter,
           }
         );
-        console.log(response);
+        console.log(response.status);
+        if (response.data.status === 409) {
+          setIsValidUsername(false);
+        }
       }}
     >
       <p>S'inscrire</p>
@@ -63,6 +67,9 @@ const Signup = () => {
         18ans.
       </p>
       <button>S'inscrire</button>
+      <p className={isValidUsername ? "hidden" : "visible"}>
+        Problème avec Username/email
+      </p>
     </form>
   );
 };
