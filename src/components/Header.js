@@ -1,12 +1,17 @@
 import Logo from "../assets/img/Vinted_logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="container">
-      <img src={Logo} alt="Vinted" />{" "}
+      <Link to="/">
+        <img src={Logo} alt="Vinted" />{" "}
+      </Link>
       <input placeholder="Que recherches-tu"></input>
       <div className="sign-up">
-        <button>s'inscrire</button>
+        <Link to="/signup">
+          <button>s'inscrire</button>
+        </Link>
         <button>se connecter</button>
       </div>
       <button className="vint">vends tes articles</button>
