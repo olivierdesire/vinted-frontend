@@ -192,7 +192,7 @@ form {
   flex-direction: column;
 }
 
-form input {
+.input-underline {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -207,14 +207,38 @@ h2 {
   font-size: 20px;
 }
 
+form button {
+  border: none;
+  margin-top: 30px;
+  color: white;
+  background-color: #2db0ba;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 /* SIGNUP */
 .checkbox {
   display: flex;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .checkbox > input {
   margin-right: 10px;
 }
 
+.texte {
+  font-size: 11px;
+}
+
+.compte {
+  font-size: 12px;
+  text-align: center;
+  color: #2db0ba;
+}
+
 /* LOGIN */
+.connect {
+  margin-top: 15px;
+}

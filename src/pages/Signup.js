@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -40,6 +40,7 @@ const Signup = () => {
     >
       <h2>S'inscrire</h2>
       <input
+        className="input-underline"
         type="text"
         placeholder="Nom d'utilisateur"
         value={username}
@@ -48,6 +49,7 @@ const Signup = () => {
         }}
       />
       <input
+        className="input-underline"
         type="email"
         placeholder="Email"
         value={email}
@@ -56,6 +58,7 @@ const Signup = () => {
         }}
       />
       <input
+        className="input-underline"
         type="password"
         placeholder="Mot de passe"
         value={password}
@@ -73,15 +76,19 @@ const Signup = () => {
         />
         <p>S'inscrire à notre newsletter</p>
       </div>
-      <p>
-        En m'inscrivant je confiormeravoir le et accepté les Termes & Coniditons
-        et Politique de Confidentialité deVinted. Je confirme avoir au moins
-        18ans.
+      <p className="texte">
+        En m'inscrivant je confirme avoir lu et accepté les Termes & Conditions
+        et Politique de Confidentialité de Vinted. Je confirme avoir au moins 18
+        ans.
       </p>
       <button>S'inscrire</button>
       <p className={isValidUsername ? "hidden" : "visible"}>
         Saisie username/email incorrecte
       </p>
+
+      <Link to="/login" style={{ textDecoration: "none" }}>
+        <p className="compte">Tu as déjà un compte? connecte-toi!</p>
+      </Link>
     </form>
   );
 };

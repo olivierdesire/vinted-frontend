@@ -8,7 +8,7 @@ const Header = ({ connected, setConnected }) => {
   return (
     <header className="container">
       <Link to="/">
-        <img src={Logo} alt="Vinted" />{" "}
+        <img src={Logo} alt="Vinted" />
       </Link>
       <input placeholder="Que recherches-tu"></input>
       {connected ? (

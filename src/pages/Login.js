@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = ({ setConnected }) => {
   const [email, setEmail] = useState("");
@@ -35,6 +35,7 @@ const Login = ({ setConnected }) => {
     >
       <h2>Se connecter</h2>
       <input
+        className="input-underline"
         type="email"
         placeholder="Adresse email"
         value={email}
@@ -43,6 +44,7 @@ const Login = ({ setConnected }) => {
         }}
       />
       <input
+        className="input-underline"
         type="password"
         placeholder="Mot de passe"
         value={password}
@@ -51,6 +53,9 @@ const Login = ({ setConnected }) => {
         }}
       />
       <button>Se connecter</button>
+      <Link to="/signup" style={{ textDecoration: "none" }}>
+        <p className="compte connect">Pas encore de compte? inscris-toi!</p>
+      </Link>
     </form>
   );
 };
