@@ -182,3 +182,39 @@ h1 {
 .visible {
   visibility: visible;
 }
+
+/* SIGNUP */
+/* LOGIN */
+form {
+  width: 220px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #fcced2;
+  padding-bottom: 5px;
+  margin-top: 20px;
+}
+
+h2 {
+  margin: 30px 0px 10px 0px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* SIGNUP */
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox > input {
+  margin-right: 10px;
+}
+
+/* LOGIN */

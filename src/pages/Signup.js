@@ -38,7 +38,7 @@ const Signup = () => {
         }
       }}
     >
-      <p>S'inscrire</p>
+      <h2>S'inscrire</h2>
       <input
         type="text"
         placeholder="Nom d'utilisateur"
@@ -63,14 +63,16 @@ const Signup = () => {
           setPassword(event.target.value);
         }}
       />
-      <input
-        type="checkbox"
-        value={newsletter}
-        onChange={(event) => {
-          setNewsletter(event.target.value);
-        }}
-      />
-      <p>S'inscrire à notre newsletter</p>
+      <div className="checkbox">
+        <input
+          type="checkbox"
+          value={newsletter}
+          onChange={(event) => {
+            setNewsletter(event.target.value);
+          }}
+        />
+        <p>S'inscrire à notre newsletter</p>
+      </div>
       <p>
         En m'inscrivant je confiormeravoir le et accepté les Termes & Coniditons
         et Politique de Confidentialité deVinted. Je confirme avoir au moins

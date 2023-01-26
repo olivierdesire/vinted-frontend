@@ -1,8 +1,10 @@
 import Logo from "../assets/img/Vinted_logo.png";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ connected, setConnected }) => {
+  const navigate = useNavigate();
   return (
     <header className="container">
       <Link to="/">
@@ -15,6 +17,7 @@ const Header = ({ connected, setConnected }) => {
             onClick={() => {
               setConnected(false);
               Cookies.remove("token");
+              navigate("/");
             }}
           >
             se déconnecter

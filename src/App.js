@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} setConnected={setConnected} />
+        <Route path="/login" element={<Login setConnected={setConnected} />} />
       </Routes>
     </BrowserRouter>
   );

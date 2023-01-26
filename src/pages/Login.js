@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const Login = ({ setConnected }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [isValidUsername, setIsValidUsername] = useState(true);
 
   const navigate = useNavigate();
 
@@ -27,14 +26,14 @@ const Login = ({ setConnected }) => {
           setConnected(true);
           navigate("/");
         } catch (error) {
-          console.log(error);
-          if (error === 401) {
-            // setIsValidUsername(false);
+          console.log(error.response.status);
+          if (error.response.status === 401) {
+            navigate("/signup");
           }
         }
       }}
     >
-      <p>Se connecter</p>
+      <h2>Se connecter</h2>
       <input
         type="email"
         placeholder="Adresse email"
@@ -52,9 +51,6 @@ const Login = ({ setConnected }) => {
         }}
       />
       <button>Se connecter</button>
-      {/* <p className={isValidUsername ? "hidden" : "visible"}>
-        Saisie username/email incorrecte
-      </p> */}
     </form>
   );
 };
