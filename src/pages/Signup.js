@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -8,23 +10,31 @@ const Signup = () => {
   const [newsletter, setNewsletter] = useState(true);
   const [isValidUsername, setIsValidUsername] = useState(true);
 
+  const navigate = useNavigate();
+
   return (
     <form
       onSubmit={async (event) => {
         event.preventDefault();
         console.log("data ==> ", username, email, password, newsletter);
-        const response = await axios.post(
-          "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
-          {
-            username: username,
-            email: email,
-            password: password,
-            newsletter: newsletter,
+        try {
+          const response = await axios.post(
+            "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
+            {
+              username: username,
+              email: email,
+              password: password,
+              newsletter: newsletter,
+            }
+          );
+          // console.log(response.data);
+          Cookies.set("token", response.data.token);
+          navigate("/");
+        } catch (error) {
+          console.log(error.response.status);
+          if (error.response.status === 409) {
+            setIsValidUsername(false);
           }
-        );
-        console.log(response.status);
-        if (response.data.status === 409) {
-          setIsValidUsername(false);
         }
       }}
     >
@@ -68,7 +78,7 @@ const Signup = () => {
       </p>
       <button>S'inscrire</button>
       <p className={isValidUsername ? "hidden" : "visible"}>
-        Problème avec Username/email
+        Saisie username/email incorrecte
       </p>
     </form>
   );
