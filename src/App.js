@@ -8,7 +8,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [connected, setConnected] = useState(false);
+  const [connected, setConnected] = useState(null);
 
   return (
     <BrowserRouter>
@@ -16,7 +16,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/offer/:id" element={<Offer />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/signup"
+          element={<Signup setConnected={setConnected} />}
+        />
         <Route path="/login" element={<Login setConnected={setConnected} />} />
       </Routes>
     </BrowserRouter>

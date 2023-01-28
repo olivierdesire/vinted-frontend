@@ -3,44 +3,54 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ setConnected }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newsletter, setNewsletter] = useState(true);
-  const [isValidUsername, setIsValidUsername] = useState(true);
+  const [newsletter, setNewsletter] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
-  return (
-    <form
-      onSubmit={async (event) => {
-        event.preventDefault();
-        console.log("data ==> ", username, email, password, newsletter);
-        try {
-          const response = await axios.post(
-            "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
-            {
-              username: username,
-              email: email,
-              password: password,
-              newsletter: newsletter,
-            }
-          );
-          // console.log(response.data);
-          Cookies.set("token", response.data.token);
-          navigate("/");
-        } catch (error) {
-          console.log(error.response.status);
-          if (error.response.status === 409) {
-            setIsValidUsername(false);
-          }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("data ==> ", username, email, password, newsletter);
+    try {
+      const { data } = await axios.post(
+        "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
+        {
+          username: username,
+          email: email,
+          password: password,
+          newsletter: newsletter,
         }
-      }}
-    >
+      );
+      // console.log(response.data);
+      Cookies.set("token", data.token, {
+        expires: 1,
+        sameSite: "strict",
+      });
+      setConnected(true);
+      navigate("/");
+    } catch (error) {
+      console.log(error.response?.data.error.message);
+      if (error.response.data.error.message === "Username missing") {
+        setErrorMessage("Utilisateur non trouvé");
+      } else {
+        setErrorMessage("Une erreur est survenue, veuillez réessayer");
+      }
+      //   setErrorMessage();
+      // }
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
       <h2>S'inscrire</h2>
       <input
         className="input-underline"
+        name="username"
+        id="username"
         type="text"
         placeholder="Nom d'utilisateur"
         value={username}
@@ -51,6 +61,8 @@ const Signup = () => {
       <input
         className="input-underline"
         type="email"
+        name="email"
+        id="email"
         placeholder="Email"
         value={email}
         onChange={(event) => {
@@ -60,6 +72,8 @@ const Signup = () => {
       <input
         className="input-underline"
         type="password"
+        name="password"
+        id="password"
         placeholder="Mot de passe"
         value={password}
         onChange={(event) => {
@@ -69,9 +83,11 @@ const Signup = () => {
       <div className="checkbox">
         <input
           type="checkbox"
+          name="newsletter"
+          id="newsletter"
           value={newsletter}
           onChange={(event) => {
-            setNewsletter(event.target.value);
+            setNewsletter(!newsletter);
           }}
         />
         <p>S'inscrire à notre newsletter</p>
@@ -82,10 +98,7 @@ const Signup = () => {
         ans.
       </p>
       <button>S'inscrire</button>
-      <p className={isValidUsername ? "hidden" : "visible"}>
-        Saisie username/email incorrecte
-      </p>
-
+      <p>{errorMessage}</p>
       <Link to="/login" style={{ textDecoration: "none" }}>
         <p className="compte">Tu as déjà un compte? connecte-toi!</p>
       </Link>
