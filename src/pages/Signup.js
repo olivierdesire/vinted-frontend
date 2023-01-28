@@ -1,9 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({ setConnected }) => {
+const Signup = ({ setToken, handleToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,22 +24,20 @@ const Signup = ({ setConnected }) => {
           newsletter: newsletter,
         }
       );
-      // console.log(response.data);
-      Cookies.set("token", data.token, {
-        expires: 1,
-        sameSite: "strict",
-      });
-      setConnected(true);
+      console.log(data);
+      handleToken(data.token);
       navigate("/");
     } catch (error) {
-      console.log(error.response?.data.error.message);
-      if (error.response.data.error.message === "Username missing") {
-        setErrorMessage("Utilisateur non trouvé");
+      console.log(error?.response.data.error.message);
+      if (error?.response.data.error.message === "Username missing") {
+        setErrorMessage("Veuillez renseigner l'utilisateur");
+      } else if (
+        error?.response.data.error.message === "Email already has an account"
+      ) {
+        setErrorMessage("Utilisateur/Email déjà existant");
       } else {
         setErrorMessage("Une erreur est survenue, veuillez réessayer");
       }
-      //   setErrorMessage();
-      // }
     }
   };
 

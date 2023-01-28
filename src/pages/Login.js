@@ -1,9 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = ({ setConnected }) => {
+const Login = ({ setToken, handleToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,16 +11,15 @@ const Login = ({ setConnected }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "https://site--backend-vinted--97yqlpf4l44b.code.run/user/login",
         {
           email: email,
           password: password,
         }
       );
-      console.log(response.data);
-      Cookies.set("token", response.data.token);
-      setConnected(true);
+      console.log(data);
+      handleToken(data.token);
       navigate("/");
     } catch (error) {
       console.log(error.response.status);

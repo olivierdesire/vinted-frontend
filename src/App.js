@@ -4,23 +4,35 @@ import Offer from "./pages/Offer";
 import Header from "./components/Header";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Cookies from "js-cookie";
 import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [connected, setConnected] = useState(null);
+  const [token, setToken] = useState(Cookies.get("token") || null);
 
+  const handleToken = (token) => {
+    if (token) {
+      Cookies.set("token", token, { expire: 1, sameSite: "strict" });
+    } else {
+      Cookies.remove("token");
+    }
+    setToken(token);
+  };
   return (
     <BrowserRouter>
-      <Header connected={connected} setConnected={setConnected} />
+      <Header token={token} setToken={setToken} handleToken={handleToken} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route
           path="/signup"
-          element={<Signup setConnected={setConnected} />}
+          element={<Signup setToken={setToken} handleToken={handleToken} />}
         />
-        <Route path="/login" element={<Login setConnected={setConnected} />} />
+        <Route
+          path="/login"
+          element={<Login setToken={setToken} handleToken={handleToken} />}
+        />
       </Routes>
     </BrowserRouter>
   );

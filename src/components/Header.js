@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ connected, setConnected }) => {
+const Header = ({ token, setToken }) => {
   const navigate = useNavigate();
   return (
     <header className="container">
@@ -11,11 +11,11 @@ const Header = ({ connected, setConnected }) => {
         <img src={Logo} alt="Vinted" />
       </Link>
       <input placeholder="Que recherches-tu"></input>
-      {connected ? (
+      {token ? (
         <div className="sign-up">
           <button
             onClick={() => {
-              setConnected(false);
+              setToken(null);
               Cookies.remove("token");
               navigate("/");
             }}
