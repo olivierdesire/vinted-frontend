@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = ({ setToken, handleToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,9 +23,15 @@ const Login = ({ setToken, handleToken }) => {
       handleToken(data.token);
       navigate("/");
     } catch (error) {
-      console.log(error.response.status);
-      if (error.response.status === 401) {
-        navigate("/signup");
+      console.log(error.response?.data.error.message);
+      if (error.response?.data.error.message === "Username missing") {
+        setErrorMessage("Veuillez renseigner l'utilisateur");
+      } else if (
+        error.response?.data.error.message === "Email already has an account"
+      ) {
+        setErrorMessage("Utilisateur/Email déjà existant");
+      } else {
+        setErrorMessage("Une erreur est survenue, veuillez réessayer");
       }
     }
   };
@@ -55,6 +62,7 @@ const Login = ({ setToken, handleToken }) => {
         }}
       />
       <button>Se connecter</button>
+      <p>{errorMessage}</p>
       <Link to="/signup" style={{ textDecoration: "none" }}>
         <p className="compte connect">Pas encore de compte? inscris-toi!</p>
       </Link>

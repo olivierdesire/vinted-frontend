@@ -28,11 +28,11 @@ const Signup = ({ setToken, handleToken }) => {
       handleToken(data.token);
       navigate("/");
     } catch (error) {
-      console.log(error?.response.data.error.message);
-      if (error?.response.data.error.message === "Username missing") {
+      console.log(error.response?.data.error.message);
+      if (error.response?.data.error.message === "Username missing") {
         setErrorMessage("Veuillez renseigner l'utilisateur");
       } else if (
-        error?.response.data.error.message === "Email already has an account"
+        error.response?.data.error.message === "Email already has an account"
       ) {
         setErrorMessage("Utilisateur/Email déjà existant");
       } else {
