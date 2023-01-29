@@ -13,7 +13,7 @@ const Signup = ({ setToken, handleToken }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("data ==> ", username, email, password, newsletter);
+    console.log("data AV ==> ", username, email, password, newsletter);
     try {
       const { data } = await axios.post(
         "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
@@ -24,11 +24,11 @@ const Signup = ({ setToken, handleToken }) => {
           newsletter: newsletter,
         }
       );
-      console.log(data);
+      console.log("data AP ==> ", data);
       handleToken(data.token);
       navigate("/");
     } catch (error) {
-      console.log(error.response?.data.error.message);
+      console.log("error==>", error);
       if (error.response?.data.error.message === "Username missing") {
         setErrorMessage("Veuillez renseigner l'utilisateur");
       } else if (

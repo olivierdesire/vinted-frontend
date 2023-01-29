@@ -10,10 +10,11 @@ import { useState } from "react";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
+  const [filters, setFilters] = useState([]);
 
   const handleToken = (token) => {
     if (token) {
-      Cookies.set("token", token, { expire: 1, sameSite: "strict" });
+      Cookies.set("token", token, { expires: 1, sameSite: "strict" });
     } else {
       Cookies.remove("token");
     }
@@ -21,9 +22,14 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <Header token={token} setToken={setToken} handleToken={handleToken} />
+      <Header
+        token={token}
+        handleToken={handleToken}
+        filters={filters}
+        setFilters={setFilters}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home filters={filters} />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route
           path="/signup"

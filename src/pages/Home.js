@@ -3,21 +3,40 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Offers from "../components/Offers";
 
-const Home = () => {
+const Home = ({ filters }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
-    const response = await axios.get(
-      " https://lereacteur-vinted-api.herokuapp.com/offers"
-    );
-    setData(response.data);
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      let filter = "";
+      console.log(filters);
+      filters.map((element, index) => {
+        if (!filter) {
+          return (filter =
+            "?" +
+            Object.keys(element)[0] +
+            "=" +
+            element[Object.keys(element)[0]]);
+        } else {
+          return (filter =
+            filter +
+            "&" +
+            Object.keys(element)[0] +
+            "=" +
+            element[Object.keys(element)[0]]);
+        }
+      });
+      console.log(filter);
+      const response = await axios.get(
+        `https://lereacteur-vinted-api.herokuapp.com/offers${filter}`
+      );
+      setData(response.data);
+      setIsLoading(false);
+    };
+
     fetchData();
-  }, []);
+  }, [filters]);
   return (
     <div>
       <section className="hero">

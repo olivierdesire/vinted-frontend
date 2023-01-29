@@ -16,7 +16,7 @@ header img {
   width: 110px;
 }
 
-header input {
+.search-bar {
   height: 35px;
   width: 500px;
   border: none;
@@ -40,6 +40,18 @@ header button {
 .vint {
   background-color: #1d696f;
   color: white;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+
+.search input {
+  border: none;
+  background-color: rgb(255, 249, 249);
 }
 
 /* HOME */
