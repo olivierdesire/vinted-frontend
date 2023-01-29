@@ -9,7 +9,6 @@ const Header = ({ token, handleToken, filters, setFilters }) => {
   const [search, setSearch] = useState("");
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
-  const [priceDesc, setPriceDesc] = useState(false);
 
   return (
     <header className="container">
@@ -78,37 +77,36 @@ const Header = ({ token, handleToken, filters, setFilters }) => {
             }}
           />
           <p>€</p>
-          <input
-            type="checkbox"
-            name="desc"
-            id="desc"
-            value={priceDesc}
-            onChange={(event) => {
-              let check = "";
-              if (event.target.value) {
-                check = "price-desc";
-              } else {
-                check = "price-asc";
-              }
+          <button
+            className="price-order"
+            onClick={() => {
               for (let i = 0; i < filters.length; i++) {
-                const keys = Object.keys(filters[i]);
-                const values = Object.values(filters[i]);
-                if (keys[0] === "sort") {
-                  if (values[0] === check) filters.splice(i, 1);
+                if (Object.keys(filters[i])[0] === "sort") {
+                  filters.splice(i, 1);
                 }
               }
-
-              setPriceDesc(!priceDesc);
               const copytab = [...filters];
-              if (!priceDesc) {
-                copytab.push({ sort: "price-desc" });
-              } else {
-                copytab.push({ sort: "price-asc" });
-              }
+              copytab.push({ sort: "price-desc" });
               setFilters(copytab);
             }}
-          />
-          <label htmlFor="asc">Prix ↘️ </label>
+          >
+            Prix ↘️
+          </button>
+          <button
+            className="price-order"
+            onClick={() => {
+              for (let i = 0; i < filters.length; i++) {
+                if (Object.keys(filters[i])[0] === "sort") {
+                  filters.splice(i, 1);
+                }
+              }
+              const copytab = [...filters];
+              copytab.push({ sort: "price-asc" });
+              setFilters(copytab);
+            }}
+          >
+            Prix ↗️
+          </button>
         </div>
       </div>
 

@@ -54,6 +54,10 @@ header button {
   background-color: rgb(255, 249, 249);
 }
 
+.price-order {
+  border: none;
+}
+
 /* HOME */
 
 .hero {
