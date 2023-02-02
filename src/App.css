@@ -209,7 +209,7 @@ form {
   margin-top: 20px;
 }
 
-h2 {
+form h2 {
   margin: 30px 0px 10px 0px;
   text-align: center;
   font-size: 20px;
@@ -249,4 +249,24 @@ form button {
 /* LOGIN */
 .connect {
   margin-top: 15px;
+}
+
+/* PUBLISH */
+
+h3 {
+  font-size: 20px;
+}
+
+.publish {
+  padding-top: 20px;
+  background-color: #eaedee;
+  height: 100vh;
+}
+.part-publish {
+  background-color: white;
+  margin: 20px 0px;
+}
+
+.trait-publish {
+  border: 0.1px solid #eaedee;
 }

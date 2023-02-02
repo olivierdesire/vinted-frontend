@@ -2,31 +2,48 @@ import Hero from "../assets/img/hero.jpg";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Offers from "../components/Offers";
+import { useNavigate } from "react-router-dom";
 
-const Home = ({ filters }) => {
+const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       let filter = "";
-      console.log(filters);
-      filters.map((element, index) => {
-        if (!filter) {
-          return (filter =
-            "?" +
-            Object.keys(element)[0] +
-            "=" +
-            element[Object.keys(element)[0]]);
+      if (search) {
+        filter = "?title=" + search;
+      }
+      if (priceMin) {
+        if (filter) {
+          filter = filter + "&priceMin=" + priceMin;
         } else {
-          return (filter =
-            filter +
-            "&" +
-            Object.keys(element)[0] +
-            "=" +
-            element[Object.keys(element)[0]]);
+          filter = "?priceMin=" + priceMin;
         }
-      });
+      }
+      if (priceMax) {
+        if (filter) {
+          filter = filter + "&priceMax=" + priceMax;
+        } else {
+          filter = "?priceMin=" + priceMax;
+        }
+      }
+      if (priceAsc) {
+        if (filter) {
+          filter = filter + "&sort=price-asc";
+        } else {
+          filter = "?sort=price-asc";
+        }
+      }
+      if (priceDesc) {
+        if (filter) {
+          filter = filter + "&sort=price-desc";
+        } else {
+          filter = "?sort=price-asc";
+        }
+      }
       console.log(filter);
       const response = await axios.get(
         `https://lereacteur-vinted-api.herokuapp.com/offers${filter}`
@@ -36,14 +53,21 @@ const Home = ({ filters }) => {
     };
 
     fetchData();
-  }, [filters]);
+  }, [search, priceMin, priceMax, priceAsc, priceDesc]);
   return (
     <div>
       <section className="hero">
         <img src={Hero} alt="Hero" />
         <div className="hero-block">
           <h1>Prêts à faire du tri dans vos placards ?</h1>
-          <button>Commencer à vendre</button>
+          <button
+            onClick={(event) => {
+              event.preventDefault();
+              navigate("/publish");
+            }}
+          >
+            Commencer à vendre
+          </button>
         </div>
       </section>
       {isLoading ? <p> Downloading ... </p> : <Offers data={data} />}

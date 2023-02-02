@@ -1,15 +1,20 @@
 import Logo from "../assets/img/Vinted_logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
-const Header = ({ token, handleToken, filters, setFilters }) => {
+const Header = ({
+  token,
+  handleToken,
+  search,
+  setSearch,
+  priceMin,
+  setPriceMin,
+  priceMax,
+  setPriceMax,
+  setPriceAsc,
+  setPriceDesc,
+}) => {
   const navigate = useNavigate();
-
-  const [search, setSearch] = useState("");
-  const [priceMin, setPriceMin] = useState("");
-  const [priceMax, setPriceMax] = useState("");
-
   return (
     <header className="container">
       <Link to="/">
@@ -23,71 +28,38 @@ const Header = ({ token, handleToken, filters, setFilters }) => {
           id="search"
           value={search}
           onChange={(event) => {
-            for (let i = 0; i < filters.length; i++) {
-              const keys = Object.keys(filters[i]);
-              if (keys[0] === "title") {
-                filters.splice(i, 1);
-              }
-            }
             setSearch(event.target.value);
-            const copytab = [...filters];
-            copytab.push({ title: event.target.value });
-            setFilters(copytab);
           }}
         />
         <div className="search">
           <p>Prix entre</p>
           <input
-            type="text"
-            name="prive-min"
+            type="number"
+            name="price-min"
             id="price-min"
             value={priceMin}
             placeholder="prix min"
             onChange={(event) => {
-              for (let i = 0; i < filters.length; i++) {
-                const keys = Object.keys(filters[i]);
-                if (keys[0] === "priceMin") {
-                  filters.splice(i, 1);
-                }
-              }
               setPriceMin(event.target.value);
-              const copytab = [...filters];
-              copytab.push({ priceMin: event.target.value });
-              setFilters(copytab);
             }}
           />
           <p>€ et</p>
           <input
-            type="text"
-            name="prive-min"
-            id="price-min"
+            type="number"
+            name="price-max"
+            id="price-max"
             value={priceMax}
             placeholder="prix max"
             onChange={(event) => {
-              for (let i = 0; i < filters.length; i++) {
-                const keys = Object.keys(filters[i]);
-                if (keys[0] === "priceMax") {
-                  filters.splice(i, 1);
-                }
-              }
               setPriceMax(event.target.value);
-              const copytab = [...filters];
-              copytab.push({ priceMax: event.target.value });
-              setFilters(copytab);
             }}
           />
           <p>€</p>
           <button
             className="price-order"
             onClick={() => {
-              for (let i = 0; i < filters.length; i++) {
-                if (Object.keys(filters[i])[0] === "sort") {
-                  filters.splice(i, 1);
-                }
-              }
-              const copytab = [...filters];
-              copytab.push({ sort: "price-desc" });
-              setFilters(copytab);
+              setPriceDesc(true);
+              setPriceAsc(false);
             }}
           >
             Prix ↘️
@@ -95,14 +67,8 @@ const Header = ({ token, handleToken, filters, setFilters }) => {
           <button
             className="price-order"
             onClick={() => {
-              for (let i = 0; i < filters.length; i++) {
-                if (Object.keys(filters[i])[0] === "sort") {
-                  filters.splice(i, 1);
-                }
-              }
-              const copytab = [...filters];
-              copytab.push({ sort: "price-asc" });
-              setFilters(copytab);
+              setPriceAsc(true);
+              setPriceDesc(false);
             }}
           >
             Prix ↗️
@@ -131,7 +97,15 @@ const Header = ({ token, handleToken, filters, setFilters }) => {
           </Link>
         </div>
       )}
-      <button className="vint">vends tes articles</button>
+      <button
+        className="vint"
+        onClick={(event) => {
+          event.preventDefault();
+          navigate("/publish");
+        }}
+      >
+        vends tes articles
+      </button>
     </header>
   );
 };

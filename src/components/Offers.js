@@ -15,7 +15,7 @@ const Offers = ({ data }) => {
                 <div className="offer">
                   <div className="avatar">
                     <img
-                      src={offer.owner.account.avatar.secure_url}
+                      src={offer.owner.account.avatar?.secure_url}
                       alt="url-owner"
                     />
                     <p>{offer.owner.account.username}</p>
