@@ -48,7 +48,7 @@ const Publish = ({ token }) => {
             );
             console.log(response.data);
           } catch (error) {
-            console.log(error.response);
+            console.log("catch>>>", error);
             setError("Une erreur est survenue");
           }
         }}
@@ -165,7 +165,7 @@ const Publish = ({ token }) => {
           <input type="checkbox" />
         </section>
 
-        <button>Ajouter</button>
+        <button className="submit-publish">Ajouter</button>
         <p>{error}</p>
       </form>
     </div>

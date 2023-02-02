@@ -270,3 +270,9 @@ h3 {
 .trait-publish {
   border: 0.1px solid #eaedee;
 }
+
+.submit-publish {
+  width: fit-content;
+  display: flex;
+  justify-content: left;
+}
