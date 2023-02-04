@@ -41,7 +41,7 @@ const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc, baseUrl }) => {
         if (filter) {
           filter = filter + "&sort=price-desc";
         } else {
-          filter = "?sort=price-asc";
+          filter = "?sort=price-desc";
         }
       }
       console.log(filter);
