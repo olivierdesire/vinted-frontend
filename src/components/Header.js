@@ -1,6 +1,5 @@
 import Logo from "../assets/img/Vinted_logo.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({
   token,
@@ -14,7 +13,7 @@ const Header = ({
   setPriceAsc,
   setPriceDesc,
 }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate;
   return (
     <header className="container">
       <Link to="/">
@@ -97,15 +96,9 @@ const Header = ({
           </Link>
         </div>
       )}
-      <button
-        className="vint"
-        onClick={(event) => {
-          event.preventDefault();
-          navigate("/publish");
-        }}
-      >
-        vends tes articles
-      </button>
+      <Link to="/Publish">
+        <button className="vint">vends tes articles</button>
+      </Link>
     </header>
   );
 };

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Offers from "../components/Offers";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc }) => {
+const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc, baseUrl }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,15 +45,13 @@ const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc }) => {
         }
       }
       console.log(filter);
-      const response = await axios.get(
-        `https://lereacteur-vinted-api.herokuapp.com/offers${filter}`
-      );
+      const response = await axios.get(`${baseUrl}/offers${filter}`);
       setData(response.data);
       setIsLoading(false);
     };
 
     fetchData();
-  }, [search, priceMin, priceMax, priceAsc, priceDesc]);
+  }, [search, priceMin, priceMax, priceAsc, priceDesc, baseUrl]);
   return (
     <div>
       <section className="hero">

@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
 import Cookies from "js-cookie";
 import "./App.css";
 import { useState } from "react";
@@ -16,6 +17,8 @@ function App() {
   const [priceMax, setPriceMax] = useState("");
   const [priceAsc, setPriceAsc] = useState(false);
   const [priceDesc, setPriceDesc] = useState(false);
+
+  const baseUrl = "https://lereacteur-vinted-api.herokuapp.com";
 
   const handleToken = (token) => {
     if (token) {
@@ -49,19 +52,33 @@ function App() {
               priceMax={priceMax}
               priceAsc={priceAsc}
               priceDesc={priceDesc}
+              baseUrl={baseUrl}
             />
           }
         />
-        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/offer/:id" element={<Offer baseUrl={baseUrl} />} />
         <Route
           path="/signup"
-          element={<Signup setToken={setToken} handleToken={handleToken} />}
+          element={
+            <Signup
+              setToken={setToken}
+              handleToken={handleToken}
+              baseUrl={baseUrl}
+            />
+          }
         />
         <Route
           path="/login"
-          element={<Login setToken={setToken} handleToken={handleToken} />}
+          element={
+            <Login
+              setToken={setToken}
+              handleToken={handleToken}
+              baseUrl={baseUrl}
+            />
+          }
         />
-        <Route path="/publish" element={<Publish token={token} />} />
+        <Route path="/publish" element={<Publish baseUrl={baseUrl} />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );

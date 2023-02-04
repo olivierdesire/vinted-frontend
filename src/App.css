@@ -215,13 +215,19 @@ form h2 {
   font-size: 20px;
 }
 
-form button {
+form button,
+.button-pay button {
   border: none;
   margin-top: 30px;
   color: white;
   background-color: #2db0ba;
   padding: 10px;
   border-radius: 5px;
+}
+
+.button-pay {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* SIGNUP */
@@ -260,7 +266,7 @@ h3 {
 .publish {
   padding-top: 20px;
   background-color: #eaedee;
-  height: 100vh;
+  height: max-content;
 }
 .part-publish {
   background-color: white;
@@ -272,7 +278,83 @@ h3 {
 }
 
 .submit-publish {
-  width: fit-content;
+  /* width: fit-content; */
   display: flex;
-  justify-content: left;
+  justify-content: flex-end;
+}
+
+.publish section > div {
+  display: flex;
+  padding: 20px;
+}
+
+.publish section > div > label {
+  /* width: calc(100% / 2); */
+  width: 50%;
+}
+
+.info-publish {
+  margin-left: 15px;
+}
+
+.checkbox-publish {
+  display: flex;
+  align-items: center;
+}
+
+.publish input {
+  border: none;
+  border-bottom: 0.1px solid #eaedee;
+  /* flex: auto; */
+  /* width: calc(100% / 2); */
+}
+
+textarea {
+  border: none;
+  border-bottom: 0.1px solid #eaedee;
+  resize: none;
+}
+
+.input-publish {
+  /* width: calc(100% / 2); */
+  width: 50%;
+}
+
+.input-file {
+  display: none;
+}
+
+.publish-photo {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  border: dotted 0.1px #eaedee;
+}
+
+.publish-photo > div {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #2db0ba;
+  background-color: white;
+  color: #2db0ba;
+  font-size: 30pxpx;
+  font-weight: bold;
+}
+
+.publish-photo label {
+}
+
+/* PAYMENT */
+
+.payment {
+  background-color: #eaedee;
+  height: 100vh;
+  padding-top: 10px;
+}
+
+.form-payment {
+  margin: 20px auto;
+  height: 500px;
+  width: 600px;
+  background-color: white;
 }

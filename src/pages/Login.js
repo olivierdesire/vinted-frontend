@@ -1,35 +1,34 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Login = ({ setToken, handleToken }) => {
+const Login = ({ setToken, handleToken, baseUrl }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
-        "https://site--backend-vinted--97yqlpf4l44b.code.run/user/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const { data } = await axios.post(`${baseUrl}/user/login`, {
+        email: email,
+        password: password,
+      });
       console.log(data);
       handleToken(data.token);
-      navigate("/");
+      setErrorMessage("");
+      if (!location.state) {
+        navigate("/");
+      } else {
+        navigate(location.state.from);
+      }
     } catch (error) {
       console.log(error.response?.data.error.message);
       if (error.response?.data.error.message === "Username missing") {
         setErrorMessage("Veuillez renseigner l'utilisateur");
-      } else if (
-        error.response?.data.error.message === "Email already has an account"
-      ) {
-        setErrorMessage("Utilisateur/Email déjà existant");
       } else {
         setErrorMessage("Une erreur est survenue, veuillez réessayer");
       }

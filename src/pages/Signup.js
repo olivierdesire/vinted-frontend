@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signup = ({ setToken, handleToken }) => {
+const Signup = ({ setToken, handleToken, baseUrl }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,15 +15,12 @@ const Signup = ({ setToken, handleToken }) => {
     event.preventDefault();
     console.log("data AV ==> ", username, email, password, newsletter);
     try {
-      const { data } = await axios.post(
-        "https://site--backend-vinted--97yqlpf4l44b.code.run/user/signup",
-        {
-          username: username,
-          email: email,
-          password: password,
-          newsletter: newsletter,
-        }
-      );
+      const { data } = await axios.post(`${baseUrl}/user/signup`, {
+        username: username,
+        email: email,
+        password: password,
+        newsletter: newsletter,
+      });
       console.log("data AP ==> ", data);
       handleToken(data.token);
       navigate("/");
