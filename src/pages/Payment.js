@@ -6,10 +6,10 @@ const stripPromise = loadStripe(
   "pk_test_51HCObyDVswqktOkX6VVcoA7V2sjOJCUB4FBt3EOiAdSz5vWudpWxwcSY8z2feWXBq6lwMgAb5IVZZ1p84ntLq03H00LDVc2RwP"
 );
 
-const Payment = () => {
+const Payment = ({ baseUrl }) => {
   return (
     <div className="payment">
-      <form className="form-payment">
+      <div className="form-payment">
         <p>Résumé de la commande</p>
         <p>Commande</p>
         <p>Frais protection acheteurs</p>
@@ -23,9 +23,9 @@ const Payment = () => {
         </p>
         <p></p>
         <Elements stripe={stripPromise}>
-          <Checkoutform />
+          <Checkoutform baseUrl={baseUrl} />
         </Elements>
-      </form>
+      </div>
     </div>
   );
 };

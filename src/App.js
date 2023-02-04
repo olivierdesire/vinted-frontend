@@ -78,7 +78,7 @@ function App() {
           }
         />
         <Route path="/publish" element={<Publish baseUrl={baseUrl} />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<Payment baseUrl={baseUrl} />} />
       </Routes>
     </BrowserRouter>
   );
