@@ -14,14 +14,18 @@ const Checkoutform = ({ baseUrl }) => {
     const cardElement = elements.getElement(CardElement);
 
     const stripeResponse = await stripe.createToken(cardElement, {
-      name: "id de l'acheteur",
+      name: "id name",
     });
 
     console.log(stripeResponse);
     const stripeToken = stripeResponse.token.id;
 
     try {
-      const response = await axios.post(`${baseUrl}/payment`, { stripeToken });
+      const response = await axios.post(`${baseUrl}/payment`, {
+        token: stripeToken,
+        // title: title,
+        // amount: amount,
+      });
       console.log(response.data);
     } catch (error) {
       console.log(error);
