@@ -12,11 +12,11 @@ const Checkoutform = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    console.log(cardElement);
-
     const stripeResponse = await stripe.createToken(cardElement, {
       name: "id de l'acheteur",
     });
+
+    console.log(stripeResponse);
   };
 
   return (
