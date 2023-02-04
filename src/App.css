@@ -352,9 +352,54 @@ textarea {
   padding-top: 10px;
 }
 
-.form-payment {
+.div-payment {
   margin: 20px auto;
-  height: 500px;
+  height: max-content;
   width: 600px;
   background-color: white;
+  padding: 20px;
+}
+
+.div-payment > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.ref-cde {
+  color: #a0a0a0;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.div-payment > div > p {
+  color: #6a6a6a;
+}
+
+#total > p {
+  font-weight: bold;
+  color: black;
+}
+.payment-text {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.div-payment > p > span {
+  font-weight: bold;
+}
+
+.pay-form {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.pay-input {
+  border: solid 1px #efefef;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.trait-payment {
+  border: 0.1px solid rgb(222, 216, 216);
 }

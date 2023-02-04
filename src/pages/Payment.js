@@ -11,27 +11,44 @@ const Payment = ({ baseUrl }) => {
   const location = useLocation();
   const { title } = location.state;
   const { price } = location.state;
+  const { username } = location.state;
+  const amount = price + 0.4 + 0.8;
 
   return (
     <div className="payment">
-      <div className="form-payment">
+      <div className="div-payment">
+        <p className="ref-cde">Résumé de la commande</p>
         <div>
-          <p>Résumé de la commande</p>
-          <p>{price}</p>
+          <p>Commande</p>
+          <p>{Number.parseFloat(price).toFixed(2)} €</p>
         </div>
-        <p>Commande</p>
-        <p>Frais protection acheteurs</p>
-        <p>Frais de port</p>
-        <p></p>
-        <p>Total</p>
-        <p>
-          Il ne vous reste oplus qu'une étape pour vous offrir<span></span>.
-          Vous allez payer <span></span> (frais de protection et frais de port
-          inclus)
+        <div>
+          <p>Frais protection acheteurs</p>
+          <p>0.40 €</p>
+        </div>
+        <div>
+          <p>Frais de port</p>
+          <p>0.80 €</p>
+        </div>
+        <p className="trait"></p>
+        <div id="total">
+          <p>Total</p>
+          <p>{Number.parseFloat(amount).toFixed(2)} €</p>
+        </div>
+        <p className="payment-text">
+          Il ne vous reste oplus qu'une étape pour vous offrir
+          <span> {title} </span>. Vous allez payer{" "}
+          <span>{Number.parseFloat(amount).toFixed(2)} €</span> (frais de
+          protection et frais de port inclus)
         </p>
-        <p></p>
+        <p className="trait-payment"></p>
         <Elements stripe={stripPromise}>
-          <Checkoutform baseUrl={baseUrl} />
+          <Checkoutform
+            baseUrl={baseUrl}
+            title={title}
+            amount={amount}
+            username={username}
+          />
         </Elements>
       </div>
     </div>

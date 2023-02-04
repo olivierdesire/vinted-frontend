@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const Checkoutform = ({ baseUrl }) => {
+const Checkoutform = ({ baseUrl, title, amount, username }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -14,7 +15,7 @@ const Checkoutform = ({ baseUrl }) => {
     const cardElement = elements.getElement(CardElement);
 
     const stripeResponse = await stripe.createToken(cardElement, {
-      name: "id name",
+      name: username,
     });
 
     console.log(stripeResponse);
@@ -23,21 +24,31 @@ const Checkoutform = ({ baseUrl }) => {
     try {
       const response = await axios.post(`${baseUrl}/payment`, {
         token: stripeToken,
-        // title: title,
-        // amount: amount,
+        title: title,
+        amount: amount,
       });
-      console.log(response.data);
+      console.log("data>>> " + response.data);
+      setCompleted(true);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return (
+  return !completed ? (
     <div>
-      <form onSubmit={handleSubmit}>
-        <CardElement />
+      <form className="pay-form" onSubmit={handleSubmit}>
+        <div className="pay-input">
+          <CardElement />
+        </div>
         <button type="submit">Pay</button>
       </form>
+    </div>
+  ) : (
+    <div>
+      <p>Paiment effectué</p>
+      <Link to="/">
+        <button>Retourner à la page d'accueil</button>
+      </Link>
     </div>
   );
 };
