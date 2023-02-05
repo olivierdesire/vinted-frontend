@@ -1,7 +1,8 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Checkoutform from "../components/CheckoutForm";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const stripPromise = loadStripe(
   "pk_test_51HCObyDVswqktOkX6VVcoA7V2sjOJCUB4FBt3EOiAdSz5vWudpWxwcSY8z2feWXBq6lwMgAb5IVZZ1p84ntLq03H00LDVc2RwP"
@@ -12,9 +13,12 @@ const Payment = ({ baseUrl }) => {
   const { title } = location.state;
   const { price } = location.state;
   const { username } = location.state;
+  const { id } = location.state;
   const amount = price + 0.4 + 0.8;
 
-  return (
+  const token = Cookies.get("token");
+
+  return token ? (
     <div className="payment">
       <div className="div-payment">
         <p className="ref-cde">Résumé de la commande</p>
@@ -52,6 +56,8 @@ const Payment = ({ baseUrl }) => {
         </Elements>
       </div>
     </div>
+  ) : (
+    <Navigate to="/login" state={{ from: `/offer/${id}` }} />
   );
 };
 

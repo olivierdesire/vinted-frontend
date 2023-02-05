@@ -48,6 +48,7 @@ const Offer = ({ baseUrl }) => {
               title: data.product_name,
               price: data.product_price,
               username: data.owner.account.username,
+              id: id,
             }}
           >
             <button> Acheter </button>
