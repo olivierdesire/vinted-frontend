@@ -44,7 +44,6 @@ const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc, baseUrl }) => {
           filter = "?sort=price-desc";
         }
       }
-      console.log(filter);
       const response = await axios.get(`${baseUrl}/offers${filter}`);
       setData(response.data);
       setIsLoading(false);

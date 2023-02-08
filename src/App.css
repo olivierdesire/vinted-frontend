@@ -278,7 +278,6 @@ h3 {
 }
 
 .submit-publish {
-  /* width: fit-content; */
   display: flex;
   justify-content: flex-end;
 }
@@ -289,7 +288,6 @@ h3 {
 }
 
 .publish section > div > label {
-  /* width: calc(100% / 2); */
   width: 50%;
 }
 
@@ -305,8 +303,6 @@ h3 {
 .publish input {
   border: none;
   border-bottom: 0.1px solid #eaedee;
-  /* flex: auto; */
-  /* width: calc(100% / 2); */
 }
 
 textarea {
@@ -316,7 +312,6 @@ textarea {
 }
 
 .input-publish {
-  /* width: calc(100% / 2); */
   width: 50%;
 }
 

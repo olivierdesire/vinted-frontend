@@ -14,7 +14,6 @@ const Signup = ({ setToken, handleToken, baseUrl }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("data AV ==> ", username, email, password, newsletter);
     try {
       const { data } = await axios.post(`${baseUrl}/user/signup`, {
         username: username,
@@ -22,12 +21,10 @@ const Signup = ({ setToken, handleToken, baseUrl }) => {
         password: password,
         newsletter: newsletter,
       });
-      console.log("data AP ==> ", data);
       handleToken(data.token);
       Cookies.set("Client-name", data.account.username);
       navigate("/");
     } catch (error) {
-      console.log("error==>", error);
       if (error.response?.data.error.message === "Username missing") {
         setErrorMessage("Veuillez renseigner l'utilisateur");
       } else if (

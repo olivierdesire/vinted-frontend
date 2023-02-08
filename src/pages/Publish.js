@@ -16,7 +16,6 @@ const Publish = ({ baseUrl }) => {
   const [error, setError] = useState("");
 
   const token = Cookies.get("token");
-  console.log(token);
 
   return token ? (
     <div className="publish">
@@ -36,10 +35,6 @@ const Publish = ({ baseUrl }) => {
           formData.append("color", color);
           formData.append("picture", file);
 
-          for (let pair of formData.entries()) {
-            console.log("clef --> :" + pair[0] + "//// value =>" + pair[1]);
-          }
-
           try {
             const response = await axios.post(
               `${baseUrl}/offer/publish`,
@@ -51,13 +46,9 @@ const Publish = ({ baseUrl }) => {
                 },
               }
             );
-            console.log(response.data);
+            console.log(response);
           } catch (error) {
-            console.log("catch>>>", error);
             setError("Une erreur est survenue");
-            // if (error.response.message === "Unauthorized") {
-            //   navigate("/");
-            // }
           }
         }}
       >
