@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Signup = ({ setToken, handleToken, baseUrl }) => {
   const [username, setUsername] = useState("");
@@ -23,6 +24,7 @@ const Signup = ({ setToken, handleToken, baseUrl }) => {
       });
       console.log("data AP ==> ", data);
       handleToken(data.token);
+      Cookies.set("Client-name", data.account.username);
       navigate("/");
     } catch (error) {
       console.log("error==>", error);

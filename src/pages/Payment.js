@@ -10,9 +10,13 @@ const stripPromise = loadStripe(
 
 const Payment = ({ baseUrl }) => {
   const location = useLocation();
+
+  if (!location) {
+    <Navigate to="/" />;
+  }
+
   const { title } = location.state;
   const { price } = location.state;
-  const { username } = location.state;
   const { id } = location.state;
   const amount = price + 0.4 + 0.8;
 
@@ -47,12 +51,7 @@ const Payment = ({ baseUrl }) => {
         </p>
         <p className="trait-payment"></p>
         <Elements stripe={stripPromise}>
-          <Checkoutform
-            baseUrl={baseUrl}
-            title={title}
-            amount={amount}
-            username={username}
-          />
+          <Checkoutform baseUrl={baseUrl} title={title} amount={amount} />
         </Elements>
       </div>
     </div>

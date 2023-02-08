@@ -47,7 +47,6 @@ const Offer = ({ baseUrl }) => {
             state={{
               title: data.product_name,
               price: data.product_price,
-              username: data.owner.account.username,
               id: id,
             }}
           >
