@@ -11,18 +11,14 @@ const stripPromise = loadStripe(
 const Payment = ({ baseUrl }) => {
   const location = useLocation();
 
-  if (!location.state.title) {
-    <Navigate to="/" />;
-  }
-
-  const title = location.state.title;
-  const price = location.state.price;
-  const id = location.state.id;
+  const title = location.state?.title;
+  const price = location.state?.price;
+  const id = location.state?.id;
   const amount = price + 0.4 + 0.8;
 
   const token = Cookies.get("token");
 
-  return token ? (
+  return token && title ? (
     <div className="payment">
       <div className="div-payment">
         <p className="ref-cde">Résumé de la commande</p>
@@ -55,8 +51,10 @@ const Payment = ({ baseUrl }) => {
         </Elements>
       </div>
     </div>
-  ) : (
+  ) : !token ? (
     <Navigate to="/login" state={{ from: `/offer/${id}` }} />
+  ) : (
+    <Navigate to="/" />
   );
 };
 
