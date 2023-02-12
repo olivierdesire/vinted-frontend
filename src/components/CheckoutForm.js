@@ -21,7 +21,6 @@ const Checkoutform = ({ baseUrl, title, amount }) => {
       name: clientUsername,
     });
 
-    console.log(stripeResponse);
     const stripeToken = stripeResponse.token.id;
 
     try {
@@ -35,7 +34,7 @@ const Checkoutform = ({ baseUrl, title, amount }) => {
         setCompleted(true);
       }
     } catch (error) {
-      console.log(error);
+      setCompleted(false);
     }
   };
 

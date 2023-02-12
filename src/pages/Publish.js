@@ -46,7 +46,6 @@ const Publish = ({ baseUrl }) => {
                 },
               }
             );
-            console.log(response);
           } catch (error) {
             setError("Une erreur est survenue");
           }
