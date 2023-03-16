@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Sentry } from "react-activity";
+import "react-activity/dist/library.css";
 
-const Publish = ({ baseUrl }) => {
+const Publish = ({ baseUrl, visible, setVisible }) => {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
@@ -14,8 +18,12 @@ const Publish = ({ baseUrl }) => {
   const [city, setCity] = useState("");
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
+  const [preview, setPreview] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const token = Cookies.get("token");
+
+  !token && !visible && setVisible("login");
 
   return token ? (
     <div className="publish">
@@ -23,7 +31,6 @@ const Publish = ({ baseUrl }) => {
         className="container"
         onSubmit={async (event) => {
           event.preventDefault();
-
           const formData = new FormData();
           formData.append("title", title);
           formData.append("description", description);
@@ -36,6 +43,7 @@ const Publish = ({ baseUrl }) => {
           formData.append("picture", file);
 
           try {
+            setIsUpdating(true);
             const response = await axios.post(
               `${baseUrl}/offer/publish`,
               formData,
@@ -46,6 +54,9 @@ const Publish = ({ baseUrl }) => {
                 },
               }
             );
+            setIsUpdating(false);
+            alert("Votre annonce a bien été publiée");
+            navigate("/");
           } catch (error) {
             setError("Une erreur est survenue");
           }
@@ -64,8 +75,12 @@ const Publish = ({ baseUrl }) => {
               type="file"
               onChange={(event) => {
                 setFile(event.target.files[0]);
+                setPreview(URL.createObjectURL(event.target.files[0]));
               }}
             />
+          </div>
+          <div>
+            {preview && <img src={preview} alt="aperçu de la publication" />}
           </div>
         </section>
         <section className="part-publish">
@@ -201,7 +216,7 @@ const Publish = ({ baseUrl }) => {
           </div>
         </section>
         <div className="submit-publish">
-          <button>Ajouter</button>
+          {!isUpdating ? <button>Ajouter</button> : <Sentry />}
         </div>
         <p>{error}</p>
       </form>

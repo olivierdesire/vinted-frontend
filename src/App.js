@@ -9,6 +9,7 @@ import Payment from "./pages/Payment";
 import Cookies from "js-cookie";
 import "./App.css";
 import { useState } from "react";
+import Modal from "./components/Modal";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
@@ -17,8 +18,12 @@ function App() {
   const [priceMax, setPriceMax] = useState("");
   const [priceAsc, setPriceAsc] = useState(false);
   const [priceDesc, setPriceDesc] = useState(false);
+  const [page, setPage] = useState(1);
+  const [visible, setVisible] = useState(null);
 
-  const baseUrl = "https://lereacteur-vinted-api.herokuapp.com";
+  // const baseUrl = "https://lereacteur-vinted-api.herokuapp.com";
+  // const baseUrl = "https://site--backend-vinted--97yqlpf4l44b.code.run";
+  const baseUrl = "http://localhost:3001";
 
   const handleToken = (token) => {
     if (token) {
@@ -41,6 +46,10 @@ function App() {
         setPriceMax={setPriceMax}
         setPriceAsc={setPriceAsc}
         setPriceDesc={setPriceDesc}
+        page={page}
+        setPage={setPage}
+        visible={visible}
+        setVisible={setVisible}
       />
       <Routes>
         <Route
@@ -52,6 +61,7 @@ function App() {
               priceMax={priceMax}
               priceAsc={priceAsc}
               priceDesc={priceDesc}
+              page={page}
               baseUrl={baseUrl}
             />
           }
@@ -77,9 +87,25 @@ function App() {
             />
           }
         />
-        <Route path="/publish" element={<Publish baseUrl={baseUrl} />} />
+        <Route
+          path="/publish"
+          element={
+            <Publish
+              baseUrl={baseUrl}
+              visible={visible}
+              setVisible={setVisible}
+            />
+          }
+        />
         <Route path="/payment" element={<Payment baseUrl={baseUrl} />} />
       </Routes>
+      {visible && (
+        <Modal
+          visible={visible}
+          setVisible={setVisible}
+          handleToken={handleToken}
+        />
+      )}
     </BrowserRouter>
   );
 }

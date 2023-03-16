@@ -58,6 +58,20 @@ header button {
   border: none;
 }
 
+.page {
+  height: 20px;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+
 /* HOME */
 
 .hero {
@@ -336,7 +350,14 @@ textarea {
   font-weight: bold;
 }
 
-.publish-photo label {
+.part-publish > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.part-publish > div:nth-child(2) img {
+  height: 150px;
+  width: 150px;
 }
 
 /* PAYMENT */
@@ -397,4 +418,32 @@ textarea {
 
 .trait-payment {
   border: 0.1px solid rgb(222, 216, 216);
+}
+
+/* MODALS */
+.modal-root {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(200, 200, 200, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  height: 500px;
+  width: 400px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.modal button {
+  align-self: flex-end;
+  margin: 20px;
 }

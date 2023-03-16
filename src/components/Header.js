@@ -12,6 +12,10 @@ const Header = ({
   setPriceMax,
   setPriceAsc,
   setPriceDesc,
+  page,
+  setPage,
+  visible,
+  setVisible,
 }) => {
   const navigate = useNavigate;
   return (
@@ -72,6 +76,25 @@ const Header = ({
           >
             Prix ↗️
           </button>
+
+          <button
+            className={page > 1 ? "page visible" : "page hidden"}
+            onClick={() => {
+              console.log(page);
+              setPage(page - 1);
+            }}
+          >
+            ≪
+          </button>
+          <button
+            className="page"
+            onClick={() => {
+              console.log(page);
+              setPage(page + 1);
+            }}
+          >
+            ≫
+          </button>
         </div>
       </div>
 
@@ -88,12 +111,12 @@ const Header = ({
         </div>
       ) : (
         <div className="sign-up">
-          <Link to="/signup">
-            <button>s'inscrire</button>
-          </Link>
-          <Link to="/login">
-            <button>se connecter</button>
-          </Link>
+          {/* <Link to="/signup"> */}
+          <button onClick={() => setVisible("signup")}>s'inscrire</button>
+          {/* </Link> */}
+          {/* <Link to="/login"> */}
+          <button onClick={() => setVisible("login")}>se connecter</button>
+          {/* </Link> */}
         </div>
       )}
       <Link to="/Publish">

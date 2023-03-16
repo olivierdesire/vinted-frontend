@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Signup = ({ setToken, handleToken, baseUrl }) => {
+const Signup = ({ handleToken, baseUrl, setVisible }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ const Signup = ({ setToken, handleToken, baseUrl }) => {
       });
       handleToken(data.token);
       Cookies.set("Client-name", data.account.username);
+      setVisible(null);
       navigate("/");
     } catch (error) {
       if (error.response?.data.error.message === "Username missing") {

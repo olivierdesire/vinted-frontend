@@ -29,7 +29,6 @@ const Checkoutform = ({ baseUrl, title, amount }) => {
         title: title,
         amount: amount,
       });
-      console.log(response.data);
       if (response.data.status === "succeeded") {
         setCompleted(true);
       }

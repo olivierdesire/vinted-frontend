@@ -4,7 +4,15 @@ import { useState, useEffect } from "react";
 import Offers from "../components/Offers";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc, baseUrl }) => {
+const Home = ({
+  search,
+  priceMin,
+  priceMax,
+  priceAsc,
+  priceDesc,
+  page,
+  baseUrl,
+}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,13 +52,20 @@ const Home = ({ search, priceMin, priceMax, priceAsc, priceDesc, baseUrl }) => {
           filter = "?sort=price-desc";
         }
       }
+      if (page) {
+        if (filter) {
+          filter = filter + "&page=" + page + "&limit=10";
+        } else {
+          filter = "?page=" + page + "&limit=10";
+        }
+      }
       const response = await axios.get(`${baseUrl}/offers${filter}`);
       setData(response.data);
       setIsLoading(false);
     };
 
     fetchData();
-  }, [search, priceMin, priceMax, priceAsc, priceDesc, baseUrl]);
+  }, [search, priceMin, priceMax, priceAsc, priceDesc, page, baseUrl]);
   return (
     <div>
       <section className="hero">
