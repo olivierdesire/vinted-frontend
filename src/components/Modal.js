@@ -13,9 +13,7 @@ const Modal = ({ visible, setVisible, handleToken }) => {
       className="modal-root"
       onClick={() => {
         if (location.pathname === "/publish") {
-          setErrorMessage(
-            "Impossible d'afficher la page actuelle sans être connecté ! 🙏"
-          );
+          setErrorMessage("Page publication indisponible sans être connecté !");
         } else {
           setVisible(null);
         }
@@ -29,7 +27,12 @@ const Modal = ({ visible, setVisible, handleToken }) => {
       >
         <button
           onClick={() => {
-            setVisible(null);
+            if (location.pathname === "/publish") {
+              navigate("/");
+              setVisible(null);
+            } else {
+              setVisible(null);
+            }
           }}
         >
           X
@@ -38,6 +41,11 @@ const Modal = ({ visible, setVisible, handleToken }) => {
           <Signup setVisible={setVisible} handleToken={handleToken} />
         ) : (
           <Login setVisible={setVisible} handleToken={handleToken} />
+        )}
+        {errorMessage && (
+          <div>
+            <p>{errorMessage}</p>
+          </div>
         )}
       </div>
     </div>

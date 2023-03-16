@@ -91,11 +91,20 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
         et Politique de Confidentialité de Vinted. Je confirme avoir au moins 18
         ans.
       </p>
-      <button>S'inscrire</button>
+      <div className="button-form">
+        <button>S'inscrire</button>
+      </div>
       <p>{errorMessage}</p>
-      <Link to="/login" style={{ textDecoration: "none" }}>
-        <p className="compte">Tu as déjà un compte? connecte-toi!</p>
-      </Link>
+      {/* <Link to="/login" style={{ textDecoration: "none" }}> */}
+      <button
+        className="link-connect"
+        onClick={() => {
+          setVisible("login");
+        }}
+      >
+        Tu as déjà un compte? connecte-toi!
+      </button>
+      {/* </Link> */}
     </form>
   );
 };

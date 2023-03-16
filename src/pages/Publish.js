@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Sentry } from "react-activity";
@@ -23,9 +23,11 @@ const Publish = ({ baseUrl, visible, setVisible }) => {
 
   const token = Cookies.get("token");
 
-  !token && !visible && setVisible("login");
+  useEffect(() => {
+    !token && !visible && setVisible("login");
+  }, []);
 
-  return token ? (
+  return (
     <div className="publish">
       <form
         className="container"
@@ -221,8 +223,6 @@ const Publish = ({ baseUrl, visible, setVisible }) => {
         <p>{error}</p>
       </form>
     </div>
-  ) : (
-    <Navigate to="/login" state={{ from: "/publish" }} />
   );
 };
 

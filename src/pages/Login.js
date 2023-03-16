@@ -62,11 +62,20 @@ const Login = ({ handleToken, baseUrl, setVisible }) => {
           setPassword(event.target.value);
         }}
       />
-      <button>Se connecter</button>
+      <div className="button-form">
+        <button>Se connecter</button>
+      </div>
       <p>{errorMessage}</p>
-      <Link to="/signup" style={{ textDecoration: "none" }}>
-        <p className="compte connect">Pas encore de compte? inscris-toi!</p>
-      </Link>
+      {/* <Link to="/signup" style={{ textDecoration: "none" }}> */}
+      <button
+        className="link-connect"
+        onClick={() => {
+          setVisible("signup");
+        }}
+      >
+        Pas encore de compte? inscris-toi!
+      </button>
+      {/* </Link> */}
     </form>
   );
 };

@@ -238,6 +238,10 @@ form button,
   padding: 10px;
   border-radius: 5px;
 }
+.button-form {
+  display: flex;
+  justify-content: center;
+}
 
 .button-pay {
   display: flex;
@@ -260,15 +264,20 @@ form button,
   font-size: 11px;
 }
 
-.compte {
+/* .compte {
   font-size: 12px;
   text-align: center;
   color: #2db0ba;
-}
+} */
 
 /* LOGIN */
-.connect {
+/* .connect {
   margin-top: 15px;
+} */
+
+.link-connect {
+  background-color: white;
+  color: #2db0ba;
 }
 
 /* PUBLISH */
@@ -434,7 +443,7 @@ textarea {
 }
 
 .modal {
-  height: 500px;
+  height: 550px;
   width: 400px;
   background-color: white;
   display: flex;
