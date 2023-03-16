@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Signup = ({ handleToken, baseUrl, setVisible }) => {
@@ -11,6 +11,7 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +25,8 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
       handleToken(data.token);
       Cookies.set("Client-name", data.account.username);
       setVisible(null);
-      navigate("/");
+
+      navigate(location.pathname);
     } catch (error) {
       if (error.response?.data.error.message === "Username missing") {
         setErrorMessage("Veuillez renseigner l'utilisateur");

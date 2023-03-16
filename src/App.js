@@ -104,6 +104,7 @@ function App() {
           visible={visible}
           setVisible={setVisible}
           handleToken={handleToken}
+          baseUrl={baseUrl}
         />
       )}
     </BrowserRouter>

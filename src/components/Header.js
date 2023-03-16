@@ -1,5 +1,5 @@
 import Logo from "../assets/img/Vinted_logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Header = ({
   token,
@@ -17,7 +17,8 @@ const Header = ({
   visible,
   setVisible,
 }) => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <header className="container">
       <Link to="/">
@@ -103,7 +104,10 @@ const Header = ({
           <button
             onClick={() => {
               handleToken(null);
-              navigate("/");
+              console.log(location.pathname);
+              if (location.pathname === "/publish") {
+                navigate("/");
+              }
             }}
           >
             se déconnecter
@@ -119,7 +123,7 @@ const Header = ({
           {/* </Link> */}
         </div>
       )}
-      <Link to="/Publish">
+      <Link to="/publish">
         <button className="vint">vends tes articles</button>
       </Link>
     </header>

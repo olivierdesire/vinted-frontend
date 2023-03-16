@@ -22,11 +22,7 @@ const Login = ({ handleToken, baseUrl, setVisible }) => {
       Cookies.set("Client-name", data.account.username);
       setErrorMessage("");
       setVisible(null);
-      if (!location.state) {
-        navigate("/");
-      } else {
-        navigate(location.state.from);
-      }
+      navigate(location.pathname);
     } catch (error) {
       console.log(error.response?.data.error.message);
       if (error.response?.data.error.message === "Username missing") {

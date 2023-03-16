@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 
-const Modal = ({ visible, setVisible, handleToken }) => {
+const Modal = ({ visible, setVisible, handleToken, baseUrl }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,9 +38,17 @@ const Modal = ({ visible, setVisible, handleToken }) => {
           X
         </button>
         {visible === "signup" ? (
-          <Signup setVisible={setVisible} handleToken={handleToken} />
+          <Signup
+            setVisible={setVisible}
+            handleToken={handleToken}
+            baseUrl={baseUrl}
+          />
         ) : (
-          <Login setVisible={setVisible} handleToken={handleToken} />
+          <Login
+            setVisible={setVisible}
+            handleToken={handleToken}
+            baseUrl={baseUrl}
+          />
         )}
         {errorMessage && (
           <div>
