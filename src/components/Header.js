@@ -36,7 +36,6 @@ const Header = ({
           }}
         />
         <div className="search">
-          <p>Prix entre</p>
           <input
             type="number"
             name="price-min"
@@ -47,7 +46,6 @@ const Header = ({
               setPriceMin(event.target.value);
             }}
           />
-          <p>€ et</p>
           <input
             type="number"
             name="price-max"
@@ -77,7 +75,7 @@ const Header = ({
           >
             Prix ↗️
           </button>
-
+          <p className="text-page">page:</p>
           <button
             className={page > 1 ? "page visible" : "page hidden"}
             onClick={() => {

@@ -62,7 +62,6 @@ const Login = ({ handleToken, baseUrl, setVisible }) => {
         <button>Se connecter</button>
       </div>
       <p>{errorMessage}</p>
-      {/* <Link to="/signup" style={{ textDecoration: "none" }}> */}
       <button
         className="link-connect"
         onClick={() => {
@@ -71,7 +70,6 @@ const Login = ({ handleToken, baseUrl, setVisible }) => {
       >
         Pas encore de compte? inscris-toi!
       </button>
-      {/* </Link> */}
     </form>
   );
 };

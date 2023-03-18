@@ -9,6 +9,8 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [preview, setPreview] = useState("");
+  const [file, setFile] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,12 +18,20 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(`${baseUrl}/user/signup`, {
-        username: username,
-        email: email,
-        password: password,
-        newsletter: newsletter,
-      });
+      const formData = new FormData();
+      formData.append("avatar", file);
+
+      const { data } = await axios.post(
+        `${baseUrl}/user/signup`,
+        {
+          username: username,
+          email: email,
+          password: password,
+          newsletter: newsletter,
+        },
+        formData
+      );
+
       handleToken(data.token);
       Cookies.set("Client-name", data.account.username);
       setVisible(null);
@@ -93,11 +103,27 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
         et Politique de Confidentialité de Vinted. Je confirme avoir au moins 18
         ans.
       </p>
+      <div className="publish-photo">
+        <div>
+          <label htmlFor="file"> ✚ Avatar</label>
+        </div>
+        <input
+          className="input-file"
+          name="file"
+          id="file"
+          type="file"
+          onChange={(event) => {
+            setFile(event.target.files[0]);
+            setPreview(URL.createObjectURL(event.target.files[0]));
+          }}
+        />
+      </div>
       <div className="button-form">
         <button>S'inscrire</button>
       </div>
-      <p>{errorMessage}</p>
-      {/* <Link to="/login" style={{ textDecoration: "none" }}> */}
+      <div className="sign-error">
+        <p>{errorMessage}</p>
+      </div>
       <button
         className="link-connect"
         onClick={() => {
@@ -106,7 +132,6 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
       >
         Tu as déjà un compte? connecte-toi!
       </button>
-      {/* </Link> */}
     </form>
   );
 };
