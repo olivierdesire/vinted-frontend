@@ -22,7 +22,7 @@ function App() {
   const [visible, setVisible] = useState(null);
 
   // const baseUrl = "https://lereacteur-vinted-api.herokuapp.com";
-  const baseUrl = "https://site--backend-vinted--97yqlpf4l44b.code.run";
+  const baseUrl = "https://site--vinted-backend--97yqlpf4l44b.code.run";
   // const baseUrl = "http://localhost:3001";
 
   const handleToken = (token) => {

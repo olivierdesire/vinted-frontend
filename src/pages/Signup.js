@@ -17,20 +17,16 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("avatar", file);
 
-      const { data } = await axios.post(
-        `${baseUrl}/user/signup`,
-        {
-          username: username,
-          email: email,
-          password: password,
-          newsletter: newsletter,
-        },
-        formData
-      );
+    try {
+      const userData = new FormData();
+      userData.append("username", username);
+      userData.append("email", email);
+      userData.append("password", password);
+      userData.append("newsletter", newsletter);
+      userData.append("avatar", file);
+
+      const { data } = await axios.post(`${baseUrl}/user/signup`, userData);
 
       handleToken(data.token);
       Cookies.set("Client-name", data.account.username);
@@ -103,20 +99,25 @@ const Signup = ({ handleToken, baseUrl, setVisible }) => {
         et Politique de Confidentialité de Vinted. Je confirme avoir au moins 18
         ans.
       </p>
-      <div className="publish-photo">
+      <div className="signup-photo">
         <div>
-          <label htmlFor="file"> ✚ Avatar</label>
+          <div>
+            <label htmlFor="file"> ✚ Avatar</label>
+          </div>
+          <input
+            className="input-file"
+            name="file"
+            id="file"
+            type="file"
+            onChange={(event) => {
+              setFile(event.target.files[0]);
+              setPreview(URL.createObjectURL(event.target.files[0]));
+            }}
+          />
         </div>
-        <input
-          className="input-file"
-          name="file"
-          id="file"
-          type="file"
-          onChange={(event) => {
-            setFile(event.target.files[0]);
-            setPreview(URL.createObjectURL(event.target.files[0]));
-          }}
-        />
+        <div className="signup-photo-preview">
+          {preview && <img src={preview} alt="aperçu de la publication" />}
+        </div>
       </div>
       <div className="button-form">
         <button>S'inscrire</button>
