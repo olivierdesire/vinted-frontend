@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const stripPromise = loadStripe(
-  "pk_test_51HCObyDVswqktOkX6VVcoA7V2sjOJCUB4FBt3EOiAdSz5vWudpWxwcSY8z2feWXBq6lwMgAb5IVZZ1p84ntLq03H00LDVc2RwP"
+  "pk_test_51MuEtmK3gnRKBNtwalxxxRReghczIanFkVF1rYsGU3J0TeKs6undhzJMVMitVjKARqumlNX8KXWOhj0TKky3vdwe00cyRd3VvA"
 );
 
 const Payment = ({ baseUrl }) => {

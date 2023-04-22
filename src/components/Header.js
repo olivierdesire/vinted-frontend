@@ -1,21 +1,19 @@
 import Logo from "../assets/img/Vinted_logo.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Range } from "react-range";
 
 const Header = ({
   token,
   handleToken,
   search,
   setSearch,
-  priceMin,
-  setPriceMin,
-  priceMax,
-  setPriceMax,
   setPriceAsc,
   setPriceDesc,
   page,
   setPage,
-  visible,
   setVisible,
+  priceRange,
+  setPriceRange,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,27 +34,52 @@ const Header = ({
           }}
         />
         <div className="search">
-          <input
-            type="number"
-            name="price-min"
-            id="price-min"
-            value={priceMin}
-            placeholder="prix min"
-            onChange={(event) => {
-              setPriceMin(event.target.value);
+          <Range
+            step={1}
+            min={0}
+            max={500}
+            values={priceRange}
+            onChange={(values) => {
+              // console.log(values);
+              return setPriceRange(values);
+            }}
+            renderTrack={({ props, children }) => {
+              // console.log(children);
+              return (
+                <div
+                  {...props}
+                  style={{
+                    ...props.style,
+                    height: "4px",
+                    width: "150px",
+                    backgroundColor: "#00b4d8",
+                  }}
+                >
+                  {children}
+                </div>
+              );
+            }}
+            renderThumb={({ props }) => {
+              // console.log(props);
+              return (
+                <div
+                  {...props}
+                  style={{
+                    ...props.style,
+                    height: "12px",
+                    width: "12px",
+                    borderRadius: "50%",
+                    backgroundColor: "#00b4d8",
+                    display: "flex",
+                    justifyContent: "center",
+                    outline: "none",
+                  }}
+                >
+                  <p className="price-thumb">{priceRange[props.key] + " €"}</p>
+                </div>
+              );
             }}
           />
-          <input
-            type="number"
-            name="price-max"
-            id="price-max"
-            value={priceMax}
-            placeholder="prix max"
-            onChange={(event) => {
-              setPriceMax(event.target.value);
-            }}
-          />
-          <p>€</p>
           <button
             className="price-order"
             onClick={() => {
@@ -79,16 +102,15 @@ const Header = ({
           <button
             className={page > 1 ? "page visible" : "page hidden"}
             onClick={() => {
-              console.log(page);
               setPage(page - 1);
             }}
           >
             ≪
           </button>
+          <p>{page}</p>
           <button
             className="page"
             onClick={() => {
-              console.log(page);
               setPage(page + 1);
             }}
           >

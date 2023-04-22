@@ -14,12 +14,12 @@ import Modal from "./components/Modal";
 function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
   const [search, setSearch] = useState("");
-  const [priceMin, setPriceMin] = useState("");
-  const [priceMax, setPriceMax] = useState("");
   const [priceAsc, setPriceAsc] = useState(false);
   const [priceDesc, setPriceDesc] = useState(false);
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(null);
+
+  const [priceRange, setPriceRange] = useState([0, 100]);
 
   // const baseUrl = "https://lereacteur-vinted-api.herokuapp.com";
   const baseUrl = "https://site--vinted-backend--97yqlpf4l44b.code.run";
@@ -40,16 +40,13 @@ function App() {
         handleToken={handleToken}
         search={search}
         setSearch={setSearch}
-        priceMin={priceMin}
-        setPriceMin={setPriceMin}
-        priceMax={priceMax}
-        setPriceMax={setPriceMax}
         setPriceAsc={setPriceAsc}
         setPriceDesc={setPriceDesc}
         page={page}
         setPage={setPage}
-        visible={visible}
         setVisible={setVisible}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
       />
       <Routes>
         <Route
@@ -57,12 +54,11 @@ function App() {
           element={
             <Home
               search={search}
-              priceMin={priceMin}
-              priceMax={priceMax}
               priceAsc={priceAsc}
               priceDesc={priceDesc}
               page={page}
               baseUrl={baseUrl}
+              priceRange={priceRange}
             />
           }
         />

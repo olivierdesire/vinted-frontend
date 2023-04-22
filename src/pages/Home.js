@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 import Offers from "../components/Offers";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({
-  search,
-  priceMin,
-  priceMax,
-  priceAsc,
-  priceDesc,
-  page,
-  baseUrl,
-}) => {
+const Home = ({ search, priceAsc, priceDesc, page, baseUrl, priceRange }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,18 +16,18 @@ const Home = ({
       if (search) {
         filter = "?title=" + search;
       }
-      if (priceMin) {
+      if (priceRange[0]) {
         if (filter) {
-          filter = filter + "&priceMin=" + priceMin;
+          filter = filter + "&priceMin=" + priceRange[0];
         } else {
-          filter = "?priceMin=" + priceMin;
+          filter = "?priceMin=" + priceRange[0];
         }
       }
-      if (priceMax) {
+      if (priceRange[1]) {
         if (filter) {
-          filter = filter + "&priceMax=" + priceMax;
+          filter = filter + "&priceMax=" + priceRange[1];
         } else {
-          filter = "?priceMin=" + priceMax;
+          filter = "?priceMax=" + priceRange[1];
         }
       }
       if (priceAsc) {
@@ -65,7 +57,7 @@ const Home = ({
     };
 
     fetchData();
-  }, [search, priceMin, priceMax, priceAsc, priceDesc, page, baseUrl]);
+  }, [search, priceAsc, priceDesc, page, baseUrl, priceRange]);
   return (
     <div>
       <section className="hero">
