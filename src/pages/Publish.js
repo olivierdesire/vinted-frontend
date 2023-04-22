@@ -25,7 +25,7 @@ const Publish = ({ baseUrl, visible, setVisible }) => {
 
   useEffect(() => {
     !token && !visible && setVisible("login");
-  }, []);
+  }, [setVisible, token, visible]);
 
   return (
     <div className="publish">
@@ -58,6 +58,7 @@ const Publish = ({ baseUrl, visible, setVisible }) => {
             );
             setIsUpdating(false);
             alert("Votre annonce a bien été publiée");
+            console.Console(response);
             navigate("/");
           } catch (error) {
             setError("Une erreur est survenue");
